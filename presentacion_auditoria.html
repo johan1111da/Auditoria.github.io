@@ -1,0 +1,1039 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Procedimientos de Auditoría - Presentación</title>
+
+<!-- Fuentes -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg-outer: linear-gradient(180deg,#0f1724 0%, #10243a 60%);
+    --card-bg: #f7f9fb;
+    --accent: #cfa24b; /* dorado suave */
+    --navy: #0b2b44;
+    --muted: #6b7280;
+    --text-dark: #0b2b44;
+    --green: #2d8a6f;
+    --danger: #d44a3a;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;font-family:"Open Sans",system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;}
+  body{
+    background: var(--bg-outer);
+    color: #222;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow:hidden;
+  }
+
+  .stage{
+    width:100%;
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+  }
+
+  .slide {
+    width: 1100px;
+    max-width: calc(100% - 80px);
+    height: 650px;
+    background: linear-gradient(180deg, #ffffff 0%, #f3f6f9 100%);
+    border-radius: 14px;
+    box-shadow: 0 18px 40px rgba(2,6,23,0.55);
+    padding: 48px;
+    position: relative;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .slide.active { display:flex; animation: fadeIn .6s ease both; }
+
+  @keyframes fadeIn {
+    from{opacity:0; transform: translateY(10px)}
+    to{opacity:1; transform: translateY(0)}
+  }
+
+  header.slide-header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:18px;
+  }
+
+  .brand {
+    width:64px; height:64px;
+    border-radius:10px;
+    background: linear-gradient(135deg,var(--navy), #1c3f5b);
+    display:flex; align-items:center; justify-content:center;
+    color:white; font-weight:700; font-family:"Poppins",sans-serif;
+    box-shadow: 0 6px 18px rgba(12,32,54,0.35);
+    font-size:18px;
+  }
+
+  .title {
+    font-family: "Poppins", sans-serif;
+    color: var(--text-dark);
+    font-size: 30px;
+    letter-spacing: .4px;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 15px;
+    margin-top:4px;
+  }
+
+  main.slide-body{
+    flex:1;
+    margin-top:8px;
+    display:flex;
+    gap:28px;
+  }
+
+  .col { flex:1; min-width:0 }
+  .center { text-align:center }
+  h1.slide-h1 {
+    font-family:"Poppins",sans-serif;
+    font-size:36px;
+    color:var(--navy);
+    margin-bottom:12px;
+    letter-spacing: .6px;
+  }
+
+  h2.slide-h2 {
+    font-family:"Poppins",sans-serif;
+    font-size:26px;
+    color:#1f4b6b;
+    margin-bottom:10px;
+  }
+
+  h3 { font-family:"Poppins",sans-serif; color:var(--navy); margin-bottom:8px; }
+
+  p, li {
+    color: #1f2937;
+    font-size:17px;
+    line-height:1.6;
+  }
+
+  ul{
+    margin-left:18px;
+    margin-top:8px;
+  }
+
+  .box {
+    background: white;
+    border-radius:10px;
+    padding:18px;
+    box-shadow: 0 8px 20px rgba(16,40,60,0.06);
+    border-left:5px solid var(--accent);
+  }
+
+  .card {
+    background:#ffffff;
+    border-radius:10px;
+    padding:14px;
+    border:1px solid rgba(12,32,54,0.04);
+  }
+
+  .note {
+    background: #fff6e6;
+    border-left:4px solid var(--accent);
+    padding:12px;
+    border-radius:8px;
+    color:#58421a;
+    font-size:15px;
+  }
+
+  table {
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+  }
+
+  th, td {
+    padding:12px 10px;
+    border:1px solid rgba(12,32,54,0.08);
+    text-align:left;
+    font-size:15px;
+  }
+
+  th {
+    background:linear-gradient(90deg,#08324d, #114e6d);
+    color:white;
+    font-weight:600;
+    font-family:"Poppins",sans-serif;
+  }
+
+  .check { color:var(--green); font-weight:700; margin-right:8px }
+
+  .floating-progress{
+    position:absolute;
+    right:18px;
+    bottom:14px;
+    background: rgba(11,43,68,0.06);
+    padding:8px 12px;
+    border-radius:10px;
+    font-size:13px;
+    color:var(--navy);
+    border:1px solid rgba(11,43,68,0.06);
+  }
+
+  .controls { display:flex; gap:10px; }
+  .btn {
+    background:transparent;
+    border:1px solid rgba(12,32,54,0.08);
+    padding:8px 12px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    color:var(--navy);
+    transition: all .15s ease;
+  }
+  .btn:hover{ transform: translateY(-2px); box-shadow: 0 8px 20px rgba(2,6,23,0.06); }
+
+  /* Integrantes dinámico (portada) */
+  .members {
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+  .member {
+    background: linear-gradient(180deg,#fff,#f2f4f7);
+    padding:10px 14px;
+    border-radius:8px;
+    box-shadow: 0 8px 18px rgba(2,6,23,0.06);
+    border-left:4px solid rgba(11,43,68,0.06);
+    min-width:200px;
+    text-align:left;
+  }
+  .member strong{ color:var(--navy); display:block; margin-bottom:6px; font-family:Poppins, sans-serif; }
+  .member span{ color:var(--muted); font-size:14px; display:block; }
+
+  /* small helpers */
+  .muted{ color:var(--muted); font-size:14px }
+  .accent{ color:var(--accent); font-weight:700 }
+
+  @media (max-width:1200px){
+    .slide{ height:78vh; padding:26px }
+    .title{ font-size:26px }
+  }
+
+  @media (max-width:720px){
+    .stage{ padding:12px }
+    .slide{ width:100%; height:100vh; border-radius:0; padding:18px }
+    .brand{ display:none }
+    h1.slide-h1{ font-size:26px }
+    h2.slide-h2{ font-size:20px }
+    .members { flex-direction:column; align-items:center }
+  }
+</style>
+</head>
+<body>
+  <div class="stage">
+
+    <!-- SLIDE 1: PORTADA -->
+    <section class="slide active" data-index="1">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">PROCEDIMIENTOS DE AUDITORÍA</div>
+          <div class="subtitle">Análisis y Clasificación — Presentación académica</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col center">
+          <h1 class="slide-h1">DIAPOSITIVA 1: Portada</h1>
+
+          <div class="card" style="max-width:780px; margin:12px auto 0; text-align:left;">
+            <p style="font-weight:700; margin-bottom:8px;">PROCEDIMIENTOS DE AUDITORÍA</p>
+            <p style="margin-bottom:6px;"><strong>Análisis y Clasificación</strong></p>
+
+            <div class="members" aria-hidden="false">
+              <div class="member">
+                <strong>Maza Fernanda</strong>
+                <span>Integrante — Investigación y ejemplos prácticos</span>
+              </div>
+              <div class="member">
+                <strong>Cumpa Johan</strong>
+                <span>Integrante — Contenido y presentación</span>
+              </div>
+              <div class="member">
+                <strong>Gilbonio Samir</strong>
+                <span>Integrante — Diagramas y tablas</span>
+              </div>
+              <div class="member">
+                <strong>Carhuas Julio</strong>
+                <span>Integrante — Revisión y conclusiones</span>
+              </div>
+            </div>
+
+            <p style="margin-top:14px; color:var(--muted)">Instituto Superior Tecnológico Público Julio Cesar Tello</p>
+          </div>
+        </div>
+      </main>
+
+      <div class="slide-footer" style="margin-top:12px;">
+        <div class="progress">Diapositiva 1 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn1">Anterior</button>
+          <button class="btn" id="nextBtn1">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 1/17</div>
+    </section>
+
+    <!-- SLIDE 2: DEFINICIÓN (mejorada) -->
+    <section class="slide" data-index="2">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">¿Qué son los Procedimientos de Auditoría?</div>
+          <div class="subtitle">DIAPOSITIVA 2</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <div class="box">
+            <p style="font-weight:700; margin-bottom:8px;">DEFINICIÓN:</p>
+            <p>"Son el conjunto de técnicas de investigación aplicables a una partida o a un grupo de hechos y circunstancias relativas a los estados financieros sujetos a examen, mediante las cuales el auditor obtiene las bases para fundamentar su opinión."</p>
+          </div>
+
+          <h2 class="slide-h2" style="margin-top:18px;">Características principales (explicadas)</h2>
+          <ul>
+            <li><strong>Predeterminación en planificación:</strong> Los procedimientos se diseñan en la etapa de planeamiento para focalizar la evidencia necesaria.</li>
+            <li><strong>Basados en evidencia esperada:</strong> Selección de pruebas según la naturaleza de las afirmaciones a verificar.</li>
+            <li><strong>Aplicación práctica de técnicas:</strong> Convierten técnicas (inspección, confirmación, etc.) en pasos concretos del programa de auditoría.</li>
+          </ul>
+
+
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 2 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn2">Anterior</button>
+          <button class="btn" id="nextBtn2">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 2/17</div>
+    </section>
+
+    <!-- SLIDE 3: NATURALEZA -->
+    <section class="slide" data-index="3">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Naturaleza de los Procedimientos</div>
+          <div class="subtitle">DIAPOSITIVA 3</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <div class="box">
+            <p style="font-weight:700; margin-bottom:8px;">CONCEPTO DE NATURALEZA:</p>
+            <p>Se refiere al tipo específico de procedimiento que el auditor debe realizar para obtener evidencia.</p>
+          </div>
+
+          <h2 class="slide-h2" style="margin-top:12px;">Elementos que determinan la naturaleza</h2>
+          <ul>
+            <li><span class="check">✓</span> Conocimiento del negocio</li>
+            <li><span class="check">✓</span> Evaluación del control interno</li>
+            <li><span class="check">✓</span> Importancia relativa (materialidad)</li>
+            <li><span class="check">✓</span> Nivel de riesgos identificados</li>
+            <li><span class="check">✓</span> Nivel de errores detectados</li>
+            <li><span class="check">✓</span> Tamaño de la muestra</li>
+          </ul>
+
+          <p class="muted" style="margin-top:8px;">Nota: la naturaleza orienta si se usarán más pruebas de cumplimiento o sustantivas, o una combinación de ambas.</p>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 3 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn3">Anterior</button>
+          <button class="btn" id="nextBtn3">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 3/17</div>
+    </section>
+
+    <!-- SLIDE 4: ALCANCE (mejorada) -->
+    <section class="slide" data-index="4">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Alcance o Extensión de los Procedimientos</div>
+          <div class="subtitle">DIAPOSITIVA 4</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <div class="box">
+            <p style="font-weight:700; margin-bottom:8px;">DEFINICIÓN DEL ALCANCE:</p>
+            <p>"Se refiere a la relación que hay entre el número de elementos o partidas individuales que se examinan (muestra) y el número de elementos o partidas que forman el total (universo)."</p>
+          </div>
+
+          <h2 class="slide-h2" style="margin-top:14px;">Representación y fórmula</h2>
+          <p>Alcance = <strong>MUESTRA / UNIVERSO</strong></p>
+
+          <h2 class="slide-h2" style="margin-top:12px;">Factores que influyen </h2>
+          <ul>
+            <li><strong>Riesgo inherente:</strong> a mayor riesgo, mayor tamaño muestral y mayor intensidad de pruebas.</li>
+            <li><strong>Importancia relativa:</strong> partidas más material requieren mayor cobertura.</li>
+            <li><strong>Confiabilidad del control interno:</strong> controles robustos pueden reducir pruebas sustantivas.</li>
+            <li><strong>Resultados de auditorías anteriores:</strong> hallazgos pasados aumentan el alcance requerido.</li>
+          </ul>
+
+          </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 4 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn4">Anterior</button>
+          <button class="btn" id="nextBtn4">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 4/17</div>
+    </section>
+
+    <!-- SLIDE 5: OPORTUNIDAD -->
+    <section class="slide" data-index="5">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Oportunidad de los Procedimientos</div>
+          <div class="subtitle">DIAPOSITIVA 5</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">¿CUÁNDO SE APLICAN? — Momentos clave</h2>
+
+          <table>
+            <tr><th>MOMENTO</th><th>ACTIVIDAD PRINCIPAL</th></tr>
+            <tr>
+              <td><strong>Visita preliminar</strong><br>(antes del cierre)</td>
+              <td>Evaluación del control interno<br>Estudio de sistemas</td>
+            </tr>
+            <tr>
+              <td><strong>Al cierre del ejercicio</strong><br>(final del año)</td>
+              <td>Observación de inventarios físicos<br>Arqueos de fondos</td>
+            </tr>
+            <tr>
+              <td><strong>Posterior al cierre</strong><br>(después de elaborar EEFF)</td>
+              <td>Validación de saldos<br>Procedimientos sustantivos</td>
+            </tr>
+          </table>
+
+  
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 5 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn5">Anterior</button>
+          <button class="btn" id="nextBtn5">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 5/17</div>
+    </section>
+
+    <!-- SLIDE 6: CLASES (mejorada) -->
+    <section class="slide" data-index="6">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Clases de Procedimientos - Clasificación</div>
+          <div class="subtitle">DIAPOSITIVA 6</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">DOS TIPOS PRINCIPALES</h2>
+
+          <div style="display:flex; gap:12px; margin-top:12px;">
+            <div class="card" style="flex:1; border-left:4px solid var(--green);">
+              <p style="font-weight:700; margin-bottom:8px;">1. PRUEBAS DE CUMPLIMIENTO</p>
+              <p class="muted">Verifican el funcionamiento del control interno y si se siguen los procedimientos establecidos.</p>
+              <ul style="margin-top:8px;">
+                <li>Pruebas de documentación</li>
+                <li>Pruebas de operación de controles</li>
+                <li>Ejemplo: revisión de autorizaciones</li>
+              </ul>
+            </div>
+
+            <div class="card" style="flex:1; border-left:4px solid var(--danger);">
+              <p style="font-weight:700; margin-bottom:8px;">2. PRUEBAS SUSTANTIVAS</p>
+              <p class="muted">Proporcionan evidencia directa sobre transacciones y saldos.</p>
+              <ul style="margin-top:8px;">
+                <li>Pruebas de detalle</li>
+                <li>Procedimientos analíticos</li>
+                <li>Ejemplo: confirmación de saldos con terceros</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="note" style="margin-top:12px;">
+            En el diseño del trabajo, se determina la combinación óptima entre ambos tipos según riesgo y materialidad.
+          </div>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 6 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn6">Anterior</button>
+          <button class="btn" id="nextBtn6">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 6/17</div>
+    </section>
+
+    <!-- SLIDE 7 -->
+    <section class="slide" data-index="7">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Pruebas de Cumplimiento - Detalle</div>
+          <div class="subtitle">DIAPOSITIVA 7</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <div class="box">
+            <p style="font-weight:700; margin-bottom:8px;">DEFINICIÓN:</p>
+            <p>"Tratan de obtener evidencia sobre el cumplimiento y aplicación correcta de los procedimientos del control interno."</p>
+          </div>
+
+          <h2 class="slide-h2" style="margin-top:14px;">PROPÓSITO</h2>
+          <ul>
+            <li>Comprobar que las operaciones corresponden a procedimientos establecidos</li>
+            <li>Asegurar consistencia en el funcionamiento del control</li>
+          </ul>
+
+          <h2 class="slide-h2" style="margin-top:12px;">EJEMPLOS</h2>
+          <div class="card" style="margin-top:6px;">
+            <ul>
+              <li>Verificar procesos de <strong>compras y cuentas por pagar</strong></li>
+              <li>Revisar ciclo de <strong>ventas y cuentas por cobrar</strong></li>
+              <li>Validar <strong>conciliaciones de caja y bancos</strong></li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 7 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn7">Anterior</button>
+          <button class="btn" id="nextBtn7">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 7/17</div>
+    </section>
+
+    <!-- SLIDE 8 -->
+    <section class="slide" data-index="8">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Pruebas Sustantivas - Detalle</div>
+          <div class="subtitle">DIAPOSITIVA 8</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <div class="box">
+            <p style="font-weight:700; margin-bottom:8px;">DEFINICIÓN:</p>
+            <p>"Procedimientos que proporcionan evidencia directa sobre la verdad o validez de las transacciones y saldos."</p>
+          </div>
+
+          <h2 class="slide-h2" style="margin-top:12px;">SE DIFERENCIAN POR</h2>
+          <table>
+            <tr><th>ASPECTO</th><th>DESCRIPCIÓN</th></tr>
+            <tr><td><strong>Objetivo</strong></td><td>Obtener evidencia sobre afirmaciones en los estados financieros</td></tr>
+            <tr><td><strong>Naturaleza</strong></td><td>Tipo de procedimientos a realizar</td></tr>
+            <tr><td><strong>Alcance</strong></td><td>Cantidad de partidas a examinar</td></tr>
+            <tr><td><strong>Oportunidad</strong></td><td>Momento de aplicación</td></tr>
+          </table>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 8 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn8">Anterior</button>
+          <button class="btn" id="nextBtn8">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 8/17</div>
+    </section>
+
+    <!-- SLIDE 9: Tipos (mejorada) -->
+    <section class="slide" data-index="9">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Tipos de Pruebas Sustantivas</div>
+          <div class="subtitle">DIAPOSITIVA 9</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">1. PRUEBAS ANALÍTICAS O DE DETALLE</h2>
+          <div class="card" style="margin-bottom:12px;">
+            <ul>
+              <li>Seguimiento de transacciones desde origen hasta culminación — útil para confirmar integridad.</li>
+              <li>Rastreo de movimientos contables — ver trazabilidad y consistencia.</li>
+              <li>Verificación de estimaciones contables — revisar supuesto y metodología.</li>
+            </ul>
+          </div>
+
+          <h2 class="slide-h2">2. PROCEDIMIENTOS ANALÍTICOS</h2>
+          <div class="card">
+            <ul>
+              <li>Análisis de relaciones y tendencias — detecta desviaciones significativas.</li>
+              <li>Comparaciones verticales y horizontales — evaluación de comportamiento temporal y estructural.</li>
+              <li>Aplicación de razones financieras — ayuda a identificar áreas de riesgo.</li>
+              <li>Identificación de fluctuaciones anormales — dispara pruebas adicionales.</li>
+            </ul>
+          </div>
+
+          </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 9 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn9">Anterior</button>
+          <button class="btn" id="nextBtn9">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 9/17</div>
+    </section>
+
+    <!-- SLIDE 10 -->
+    <section class="slide" data-index="10">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Procedimientos Analíticos - NIA 520</div>
+          <div class="subtitle">DIAPOSITIVA 10</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <div class="box">
+            <p style="font-weight:700; margin-bottom:8px;">DEFINICIÓN SEGÚN NIA-520:</p>
+            <p>"Evaluaciones de información financiera mediante estudio de relaciones entre datos financieros y no financieros."</p>
+          </div>
+
+          <h2 class="slide-h2" style="margin-top:12px;">APLICACIÓN</h2>
+          <ul>
+            <li>Comparar montos actuales con períodos anteriores</li>
+            <li>Construir modelos de regresión</li>
+            <li>Analizar variaciones porcentuales</li>
+            <li>Identificar inconsistencias significativas</li>
+          </ul>
+
+          <div class="card" style="margin-top:12px;">
+            <p style="font-weight:700;">MOMENTOS DE USO:</p>
+            <ul>
+              <li>Etapa de planeación</li>
+              <li>Durante la ejecución</li>
+              <li>Revisión global al final de la auditoría</li>
+            </ul>
+          </div>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 10 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn10">Anterior</button>
+          <button class="btn" id="nextBtn10">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 10/17</div>
+    </section>
+
+    <!-- SLIDE 11 -->
+    <section class="slide" data-index="11">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Procedimientos Alternativos</div>
+          <div class="subtitle">DIAPOSITIVA 11</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">¿QUÉ SON?</h2>
+          <p>Pruebas que aplica el auditor cuando es imposible desarrollar los procedimientos planificados.</p>
+
+          <h2 class="slide-h2" style="margin-top:12px;">EJEMPLO PRÁCTICO</h2>
+          <div class="card" style="margin-top:8px;">
+            <p><strong>Situación:</strong> No presenciar toma de inventarios al cierre</p>
+            <p style="margin-top:8px;"><strong>Solución alternativa:</strong></p>
+            <ul>
+              <li>Verificar inventarios en fecha posterior</li>
+              <li>Trabajo retrospectivo usando kárdex</li>
+              <li>Comparar saldo final con cierre contable</li>
+            </ul>
+            <div class="note" style="margin-top:10px;"><strong>OBJETIVO:</strong> Obtener evidencia suficiente por medios diferentes.</div>
+          </div>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 11 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn11">Anterior</button>
+          <button class="btn" id="nextBtn11">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 11/17</div>
+    </section>
+
+    <!-- SLIDE 12 -->
+    <section class="slide" data-index="12">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Relación entre Procedimientos y Técnicas</div>
+          <div class="subtitle">DIAPOSITIVA 12</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">DIFERENCIA CLAVE</h2>
+
+          <table>
+            <tr><th>TÉCNICAS</th><th>PROCEDIMIENTOS</th></tr>
+            <tr><td>Herramientas o métodos de investigación</td><td>Aplicación práctica de las técnicas</td></tr>
+            <tr><td>• Inspección<br>• Observación<br>• Confirmación<br>• Cálculo</td><td>Pasos detallados en el programa de auditoría</td></tr>
+            <tr><td style="background:#e8f5e9;"><strong>Ejemplo:</strong><br>"Confirmación"</td><td style="background:#e3f2fd;"><strong>Ejemplo:</strong><br>"Enviar cartas a 30 clientes seleccionados aleatoriamente"</td></tr>
+          </table>
+
+          <div class="note" style="margin-top:12px;"><strong>Las técnicas se convierten en procedimientos durante la planificación.</strong></div>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 12 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn12">Anterior</button>
+          <button class="btn" id="nextBtn12">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 12/17</div>
+    </section>
+
+    <!-- SLIDE 13 -->
+    <section class="slide" data-index="13">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Documentación de Procedimientos</div>
+          <div class="subtitle">DIAPOSITIVA 13</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">ELEMENTOS ESENCIALES</h2>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:10px;">
+            <div class="card"><strong style="color:#0b3b57;">✓ PROGRAMA DE AUDITORÍA</strong><p style="margin-top:8px;">Lista detallada de procedimientos</p></div>
+            <div class="card"><strong style="color:#1f8a6f;">✓ PAPELES DE TRABAJO</strong><p style="margin-top:8px;">Evidencia de la ejecución</p></div>
+            <div class="card"><strong style="color:#d44a3a;">✓ REFERENCIAS CRUZADAS</strong><p style="margin-top:8px;">Conexión entre documentos</p></div>
+            <div class="card"><strong style="color:#f39c12;">✓ MARCAS DE AUDITORÍA</strong><p style="margin-top:8px;">Símbolos que identifican el trabajo realizado</p></div>
+          </div>
+
+          <div class="card" style="margin-top:12px; border:1px solid rgba(155,89,182,0.12);">
+            <strong style="color:#6b3f8a;">✓ CONCLUSIONES</strong>
+            <p style="margin-top:8px;">Resultados de cada procedimiento aplicado</p>
+          </div>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 13 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn13">Anterior</button>
+          <button class="btn" id="nextBtn13">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 13/17</div>
+    </section>
+
+    <!-- SLIDE 14: Factores (mejorada) -->
+    <section class="slide" data-index="14">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Factores para Determinar Procedimientos</div>
+          <div class="subtitle">DIAPOSITIVA 14</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">EL AUDITOR CONSIDERA</h2>
+
+          <div class="card" style="margin-top:8px;">
+            <h3>1. EVALUACIÓN DE RIESGOS</h3>
+            <ul>
+              <li>Riesgo inherente — naturaleza del negocio y complejidad de transacciones</li>
+              <li>Riesgo de control — eficacia del sistema de controles</li>
+              <li>Riesgo de detección — probabilidad de no detectar errores</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top:10px;">
+            <h3>2. MATERIALIDAD</h3>
+            <p>Definición de umbrales que afectan el diseño y el alcance de las pruebas.</p>
+          </div>
+
+          <div class="card" style="margin-top:10px;">
+            <h3>3. CONTROL INTERNO</h3>
+            <p>Evaluación de fortalezas y debilidades para ajustar procedimientos.</p>
+          </div>
+
+          <div class="card" style="margin-top:10px;">
+            <h3>4. EXPERIENCIA PREVIA</h3>
+            <p>Resultados de auditorías previas que informan riesgos y enfoques.</p>
+          </div>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 14 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn14">Anterior</button>
+          <button class="btn" id="nextBtn14">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 14/17</div>
+    </section>
+
+    <!-- SLIDE 15: Evidencia (mejorada) -->
+    <section class="slide" data-index="15">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Evidencia Obtenida de los Procedimientos</div>
+          <div class="subtitle">DIAPOSITIVA 15</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">ATRIBUTOS REQUERIDOS</h2>
+
+          <div style="display:flex; gap:14px; margin-top:12px;">
+            <div class="card" style="flex:1; border:3px solid rgba(52,147,201,0.12);">
+              <h3 style="text-align:center; color:#0b5a87; margin-bottom:8px;">SUFICIENCIA (Cantidad)</h3>
+              <ul>
+                <li>Cantidad adecuada de pruebas realizadas</li>
+                <li>Cobertura apropiada del universo</li>
+              </ul>
+              <p class="muted" style="margin-top:8px;">Ejemplo académico: si la probabilidad de error esperada es alta, incremente la muestra.</p>
+            </div>
+
+            <div class="card" style="flex:1; border:3px solid rgba(45,138,111,0.12);">
+              <h3 style="text-align:center; color:#2b8a6f; margin-bottom:8px;">COMPETENCIA (Calidad)</h3>
+              <ul>
+                <li>Validez de la evidencia</li>
+                <li>Confiabilidad de la fuente</li>
+                <li>Relevancia para los objetivos</li>
+              </ul>
+              <p class="muted" style="margin-top:8px;">Ejemplo: confirmar saldo con tercero es más competente que sólo revisar registros internos.</p>
+            </div>
+          </div>
+
+          <div class="note" style="margin-top:14px;">La evidencia debe ser objetiva y convincente para sustentar hallazgos y conclusiones.</div>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 15 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn15">Anterior</button>
+          <button class="btn" id="nextBtn15">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 15/17</div>
+    </section>
+
+    <!-- SLIDE 16: Coordinación (mejorada) -->
+    <section class="slide" data-index="16">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Coordinación de Procedimientos</div>
+          <div class="subtitle">DIAPOSITIVA 16</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">IMPORTANCIA DE LA COORDINACIÓN</h2>
+
+          <div class="card" style="margin-top:8px;">
+            <ul>
+              <li><span class="check">✓</span> Evitar omisión de procedimientos básicos</li>
+              <li><span class="check">✓</span> Prevenir duplicación de trabajo</li>
+              <li><span class="check">✓</span> Asegurar cobertura completa del alcance</li>
+              <li><span class="check">✓</span> Facilitar trabajo en equipo</li>
+              <li><span class="check">✓</span> Optimizar uso de recursos y tiempo</li>
+            </ul>
+          </div>
+
+          <div class="card" style="margin-top:12px; text-align:center;">
+            <strong>HERRAMIENTA CLAVE:</strong><br>El programa de auditoría como instrumento de coordinación.
+          </div>
+
+          <div class="note" style="margin-top:12px;">La frase “El programa de auditoría como instrumento de coordinación” significa que el programa de auditoría cumple una función clave para organizar, dirigir y sincronizar todo el trabajo del equipo auditor.</div>
+        </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 16 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn16">Anterior</button>
+          <button class="btn" id="nextBtn16">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 16/17</div>
+    </section>
+
+    <!-- SLIDE 17: CONCLUSIONES (mejorada) -->
+    <section class="slide" data-index="17">
+      <header class="slide-header">
+        <div class="brand">PA</div>
+        <div>
+          <div class="title">Conclusiones Clave</div>
+          <div class="subtitle">DIAPOSITIVA 17</div>
+        </div>
+      </header>
+
+      <main class="slide-body">
+        <div class="col">
+          <h2 class="slide-h2">PUNTOS FUNDAMENTALES</h2>
+          <ul>
+            <li><span class="check">✓</span> Los procedimientos son la aplicación práctica de técnicas de auditoría</li>
+            <li><span class="check">✓</span> Se clasifican en pruebas de cumplimiento y sustantivas</li>
+            <li><span class="check">✓</span> Su naturaleza, alcance y oportunidad dependen del criterio profesional</li>
+            <li><span class="check">✓</span> Deben generar evidencia suficiente y competente</li>
+            <li><span class="check">✓</span> Se documentan en programas de auditoría y papeles de trabajo</li>
+            <li><span class="check">✓</span> Son esenciales para fundamentar la opinión del auditor</li>
+          </ul>
+
+          <div class="card" style="margin-top:16px; text-align:center; font-weight:700; font-size:18px;">
+            "La calidad de los procedimientos determina la calidad de la auditoría"
+          </div>
+
+         </div>
+      </main>
+
+      <div class="slide-footer">
+        <div class="progress">Diapositiva 17 de 17</div>
+        <div class="controls">
+          <button class="btn" id="prevBtn17">Anterior</button>
+          <button class="btn" id="nextBtn17">Siguiente</button>
+        </div>
+      </div>
+
+      <div class="floating-progress">Slide 17/17</div>
+    </section>
+
+  </div>
+
+<script>
+  // Navegación global
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let idx = 0;
+  const total = slides.length;
+
+  function show(i){
+    slides.forEach(s => s.classList.remove('active'));
+    const s = slides[i];
+    s.classList.add('active');
+    // actualizar floating progress
+    const fp = s.querySelector('.floating-progress');
+    if(fp) fp.textContent = 'Slide ' + (i+1) + '/' + total;
+    // actualizar footer progress (cada slide tiene texto estático, pero se mantiene coherencia)
+  }
+
+  // Inicial
+  show(idx);
+
+  // Botones Prev/Next (por id prefix)
+  document.querySelectorAll('[id^=nextBtn]').forEach(b => {
+    b.addEventListener('click', (ev) => { ev.stopPropagation(); idx = (idx + 1) % total; show(idx); });
+  });
+  document.querySelectorAll('[id^=prevBtn]').forEach(b => {
+    b.addEventListener('click', (ev) => { ev.stopPropagation(); idx = (idx - 1 + total) % total; show(idx); });
+  });
+
+  // Teclas del teclado
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'ArrowRight' || e.key === 'PageDown') { idx = (idx + 1) % total; show(idx); }
+    if(e.key === 'ArrowLeft' || e.key === 'PageUp')  { idx = (idx - 1 + total) % total; show(idx); }
+    if(e.key === 'Home') { idx = 0; show(idx); }
+    if(e.key === 'End') { idx = total -1; show(idx); }
+  });
+
+  // Clic en stage: avanzar (evitar si clic en botón o enlace)
+  document.querySelector('.stage').addEventListener('click', (e) => {
+    if(e.target.closest('.btn')) return;
+    if(e.target.closest('a')) return;
+    idx = (idx + 1) % total; show(idx);
+  });
+
+  // Evitar selección accidental
+  document.addEventListener('selectstart', (e) => { if(document.querySelector('.slide.active')) e.preventDefault(); });
+</script>
+</body>
+</html>
